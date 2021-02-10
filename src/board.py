@@ -1,9 +1,11 @@
 import random
+from typing import List
+
 import numpy as np
 import pygame as pg
 
-
 from settings import Dimension, Colors
+from point import Point
 
 
 class Board:
@@ -33,6 +35,7 @@ class Board:
         """
         self.window = window
         self.matrix = np.full((10, 10), 1)
+        self.obstacles = self.create_obstacles()
 
     def draw_board(self):
         """
@@ -63,16 +66,12 @@ class Board:
 
         :return: None
         """
-        obstacles = self.create_obstacles()
 
-        for obstacle in obstacles:
-            obstacle_x_cord, obstacle_y_cord = obstacle
-            obstacle_x_cord *= Dimension.SQUARE_WIDTH.value
-            obstacle_y_cord *= Dimension.SQUARE_HEIGHT.value
-            rect = (obstacle_x_cord, obstacle_y_cord, Dimension.SQUARE_WIDTH.value, Dimension.SQUARE_HEIGHT.value)
-            pg.draw.rect(self.window, Colors.BLACK.value, rect)
+        for obstacle in self.obstacles:
 
-    def create_obstacles(self):
+            obstacle.draw(self.window, Colors.BLACK.value)
+
+    def create_obstacles(self) -> List[Point]:
         """
         Function creates from 1 to 10 obstacles with random coordinates.
         The self.matrix is modified to reflect the changes to on the board
@@ -87,11 +86,12 @@ class Board:
             obstacle_x_cord = random.randint(0, 9)
             obstacle_y_cord = random.randint(0, 9)
             self.matrix[obstacle_y_cord][obstacle_x_cord] = 0
-            obstacles.append((obstacle_x_cord, obstacle_y_cord))
+            obstacles.append(Point(obstacle_x_cord, obstacle_y_cord))
 
         return obstacles
 
-    def redraw_board(self):
-        pass
+    def is_square_free(self, clicked_point: Point) -> bool:
+        x_cord, y_cord = clicked_point.get_squared_coordinates()
+        return self.matrix[y_cord][x_cord] == 1
 
 
