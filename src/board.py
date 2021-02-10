@@ -5,7 +5,7 @@ import numpy as np
 import pygame as pg
 
 from settings import Dimension, Colors
-from point import Point
+from square import Square
 
 
 class Board:
@@ -71,7 +71,7 @@ class Board:
 
             obstacle.draw(self.window, Colors.BLACK.value)
 
-    def create_obstacles(self) -> List[Point]:
+    def create_obstacles(self) -> List[Square]:
         """
         Function creates from 1 to 10 obstacles with random coordinates.
         The self.matrix is modified to reflect the changes to on the board
@@ -86,12 +86,15 @@ class Board:
             obstacle_x_cord = random.randint(0, 9)
             obstacle_y_cord = random.randint(0, 9)
             self.matrix[obstacle_y_cord][obstacle_x_cord] = 0
-            obstacles.append(Point(obstacle_x_cord, obstacle_y_cord))
+            obstacles.append(Square(obstacle_x_cord, obstacle_y_cord))
 
         return obstacles
 
-    def is_square_free(self, clicked_point: Point) -> bool:
-        x_cord, y_cord = clicked_point.get_squared_coordinates()
+    def is_square_free(self, clicked_square: Square) -> bool:
+        x_cord, y_cord = clicked_square.get_squared_coordinates()
         return self.matrix[y_cord][x_cord] == 1
+
+    def recreate_obstacles(self):
+        self.obstacles = self.create_obstacles()
 
 

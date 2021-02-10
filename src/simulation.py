@@ -4,7 +4,7 @@ import pygame as pg
 from settings import Dimension, Buttons
 from board import Board
 from pathfinder import PathFinder
-from point import Point
+from square import Square
 
 
 class Simulation:
@@ -46,7 +46,7 @@ class Simulation:
         self.board.draw_board()
         while True:
 
-            self.path_finder.draw_points()
+            self.path_finder.draw_squares()
             if self.path_finder.path_able_to_find:
                 self.path_finder.find_path()
 
@@ -56,11 +56,25 @@ class Simulation:
                     sys.exit()
 
                 if event.type == pg.MOUSEBUTTONUP and event.button == Buttons.MOUSE_LEFT.value:
-                    clicked_point = Point(*pg.mouse.get_pos())
-                    clicked_point.convert_to_square_coordinates()
-                    if self.board.is_square_free(clicked_point):
-                        self.path_finder.set_point(clicked_point)
+                    self.choose_square()
 
                 if event.type == pg.MOUSEBUTTONUP and event.button == Buttons.MOUSE_RIGHT.value:
-                    self.path_finder.reset()
-                    self.board.draw_board()
+                    self.clear_board()
+
+                if event.type == pg.KEYDOWN and event.key == pg.K_r:
+                    self.new_board()
+
+    def new_board(self):
+        self.path_finder.reset()
+        self.board.recreate_obstacles()
+        self.board.draw_board()
+
+    def choose_square(self):
+        clicked_square = Square(*pg.mouse.get_pos())
+        clicked_square.convert_to_square_coordinates()
+        if self.board.is_square_free(clicked_square):
+            self.path_finder.set_point(clicked_square)
+
+    def clear_board(self):
+        self.path_finder.reset()
+        self.board.draw_board()
