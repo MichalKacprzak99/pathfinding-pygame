@@ -3,7 +3,7 @@ from enum import Enum, unique
 
 class Dimension(Enum):
     """
-    Enum for storing dimensions of screen/board and squares.
+    Class for storing dimensions of screen/board and squares.
     """
     SQUARE_WIDTH = 80
     SQUARE_HEIGHT = 80
@@ -14,7 +14,7 @@ class Dimension(Enum):
 @unique
 class Colors(Enum):
     """
-    Enum for storing colors in RGB format.
+    Class for storing colors in RGB format.
     """
     WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
@@ -26,6 +26,15 @@ class Colors(Enum):
     GRAY = (128, 128, 128)
     BUMBLEBEE = (255, 226, 5)
     ORANGE = (229, 83, 0)
+
+
+@unique
+class Buttons(Enum):
+    """
+    Class for storing keys for mouse and keyboard buttons
+    """
+    MOUSE_LEFT = 1
+    MOUSE_RIGHT = 3
 
 
 
