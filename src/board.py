@@ -46,7 +46,6 @@ class Board:
         self.window.fill(Colors.WHITE.value)
         self.draw_lines()
         self.draw_obstacles()
-        pg.display.update()
 
     def draw_lines(self):
         """
@@ -59,6 +58,8 @@ class Board:
 
         for y_cord in range(0, Dimension.SCREEN_HEIGHT.value, Dimension.SQUARE_HEIGHT.value):
             pg.draw.line(self.window, Colors.BLACK.value, (0, y_cord), (Dimension.SCREEN_WIDTH.value, y_cord))
+
+        pg.display.update()
 
     def draw_obstacles(self):
         """

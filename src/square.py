@@ -47,4 +47,4 @@ class Square:
         rect = (self.window_coordinates, (Dimension.SQUARE_WIDTH.value - 1, Dimension.SQUARE_HEIGHT.value - 1))
         pg.draw.rect(window, color, rect)
 
-        pg.display.update()
+        pg.display.update(rect)
