@@ -106,6 +106,7 @@ class Board:
 
         :return: None
         """
+        self.matrix = np.full((10, 10), 1)
         self.obstacles = self.create_obstacles()
 
 
