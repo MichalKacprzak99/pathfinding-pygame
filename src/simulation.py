@@ -65,16 +65,26 @@ class Simulation:
                     self.new_board()
 
     def new_board(self):
+        """
+        Create new obstacles and redrawn board.
+        :return:
+        """
         self.path_finder.reset()
         self.board.recreate_obstacles()
         self.board.draw_board()
 
     def choose_square(self):
-        clicked_square = Square(*pg.mouse.get_pos())
-        clicked_square.convert_to_square_coordinates()
-        if self.board.is_square_free(clicked_square):
+        clicked_square_pos = Square.convert_to_square_coordinates(pg.mouse.get_pos())
+        clicked_square = Square(*clicked_square_pos)
+        if self.board.is_square_empty(clicked_square):
             self.path_finder.set_point(clicked_square)
 
     def clear_board(self):
+        """
+        Removes the found path and selected squares from the board.
+        Board is redrawn
+
+        :return: None
+        """
         self.path_finder.reset()
         self.board.draw_board()
