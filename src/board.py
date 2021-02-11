@@ -21,7 +21,7 @@ class Board:
         Pygame object for representing images.
     matrix: numpy.ndarray
         array 10x10 representing state of board .
-        1 represents empty square and 0 represent obstacle
+        1 represents empty square and 0 represent obstacle.
 
     """
     def __init__(self, window: pg.Surface):
@@ -90,11 +90,22 @@ class Board:
 
         return obstacles
 
-    def is_square_free(self, clicked_square: Square) -> bool:
-        x_cord, y_cord = clicked_square.get_squared_coordinates()
+    def is_square_empty(self, clicked_square: Square) -> bool:
+        """
+        Checks if clicked square is empty and it's possible to start/end path here.
+
+        :param clicked_square: A square of board which user clicked.
+        :return: true if square is empty, otherwise false
+        """
+        x_cord, y_cord = clicked_square.board_coordinates
         return self.matrix[y_cord][x_cord] == 1
 
     def recreate_obstacles(self):
+        """
+        Creates new state of board with different number of obstacles and their positions.
+
+        :return: None
+        """
         self.obstacles = self.create_obstacles()
 
 
