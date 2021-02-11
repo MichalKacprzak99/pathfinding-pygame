@@ -74,7 +74,7 @@ class Simulation:
         self.board.draw_board()
 
     def choose_square(self):
-        clicked_square_pos = Square.convert_to_square_coordinates(pg.mouse.get_pos())
+        clicked_square_pos = Square.convert_to_board_coordinates(pg.mouse.get_pos())
         clicked_square = Square(*clicked_square_pos)
         if self.board.is_square_empty(clicked_square):
             self.path_finder.set_point(clicked_square)

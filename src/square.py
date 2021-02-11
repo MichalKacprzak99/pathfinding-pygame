@@ -7,22 +7,44 @@ from settings import Dimension
 
 
 class Square:
+    """
+    Class for representing square on the board
+    """
     def __init__(self, x: int, y: int):
+        """
+         Creates a new ``Square`` instance.
+        """
         self.x, self.y = x, y
 
-    def get_screen_coordinates(self) -> Tuple[int, int]:
+    @property
+    def window_coordinates(self) -> Tuple[int, int]:
+        """
+        Transform board coordinates of square to window coordinates
+
+        :return: coordinates of top left corner of square
+        """
         return self.x * Dimension.SQUARE_WIDTH.value + 1, self.y * Dimension.SQUARE_HEIGHT.value + 1
 
-    def convert_to_square_coordinates(self):
-        self.x = math.floor(self.x / Dimension.SQUARE_WIDTH.value)
-        self.y = math.floor(self.y / Dimension.SQUARE_HEIGHT.value)
+    @staticmethod
+    def convert_to_board_coordinates(clicked_position: Tuple[int, int]) -> Tuple[int, int]:
+        x, y = clicked_position
+        x = math.floor(x / Dimension.SQUARE_WIDTH.value)
+        y = math.floor(y / Dimension.SQUARE_HEIGHT.value)
+        return x, y
 
-    def get_squared_coordinates(self) -> Tuple[int, int]:
+    @property
+    def board_coordinates(self) -> Tuple[int, int]:
         return self.x, self.y
 
     def draw(self, window: pg.Surface, color: Tuple[int, int, int]):
-        rect = (self.get_screen_coordinates(),
-                (Dimension.SQUARE_WIDTH.value - 1, Dimension.SQUARE_HEIGHT.value - 1))
+        """
+        Full fill square with given color.
+
+        :param window: window created by pygame
+        :param color: color in RGB format
+        :return: None
+        """
+        rect = (self.window_coordinates, (Dimension.SQUARE_WIDTH.value - 1, Dimension.SQUARE_HEIGHT.value - 1))
         pg.draw.rect(window, color, rect)
 
         pg.display.update()
