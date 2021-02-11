@@ -31,7 +31,7 @@ More detailed description in future will be available on my first Medium article
     $ python main.py     
     
 ## Demo
-![here](https://github.com/MichalKacprzak99/pathfinding-pygame/blob/master/demo/demo.gif)
+![here](https://github.com/MichalKacprzak99/pathfinding-pygame/blob/main/demo/demo.gif)
 ## Features
 * board contains randomized obstacles which cannot be chosen as start/end point of path
 * user can choose start/end point of path by pressing left mouse button
