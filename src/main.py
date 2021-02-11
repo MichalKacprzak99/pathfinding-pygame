@@ -1,6 +1,6 @@
-from simulation import Simulation
+from app import Application
 
 
 if __name__ == "__main__":
-    sim = Simulation()
+    sim = Application()
     sim.run()

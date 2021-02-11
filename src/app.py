@@ -7,7 +7,7 @@ from pathfinder import PathFinder
 from square import Square
 
 
-class Simulation:
+class Application:
     """
     Main class of application
 
@@ -27,7 +27,7 @@ class Simulation:
     """
     def __init__(self):
         """
-         Creates a new ``Simulation`` instance.
+         Creates a new ``Application`` instance.
         """
         pg.init()
         pg.font.init()
