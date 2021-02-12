@@ -34,9 +34,8 @@ class Board:
                 Pygame object for representing images.
         """
         self.window = window
-        self.board_size = (Dimension.SCREEN_HEIGHT.value//Dimension.SQUARE_HEIGHT.value,
-                           Dimension.SCREEN_WIDTH.value//Dimension.SQUARE_WIDTH.value)
-        self.board_matrix = np.full(self.board_size, 1)
+
+        self.board_matrix = np.full(Dimension.board_size(), 1)
         self.maximum_obstacles_on_board = 10
         self.obstacles = self.create_obstacles()
 
@@ -85,11 +84,10 @@ class Board:
         """
         obstacles_number = random.randint(1, self.maximum_obstacles_on_board)
         obstacles = list()
-        board_height, board_width = self.board_size
 
         while len(obstacles) < obstacles_number:
-            obstacle_x_cord = random.randint(0, board_width - 1)
-            obstacle_y_cord = random.randint(0, board_height - 1)
+            obstacle_x_cord = random.randint(0, Dimension.board_width() - 1)
+            obstacle_y_cord = random.randint(0, Dimension.board_height() - 1)
             obstacle = Square(obstacle_x_cord, obstacle_y_cord)
             if obstacle not in obstacles:
                 self.board_matrix[obstacle_y_cord][obstacle_x_cord] = 0
@@ -115,5 +113,3 @@ class Board:
         """
         self.board_matrix = np.full((10, 10), 1)
         self.obstacles = self.create_obstacles()
-
-

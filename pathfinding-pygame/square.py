@@ -27,8 +27,8 @@ class Square:
     @staticmethod
     def convert_to_board_coordinates(clicked_position: Tuple[int, int]) -> Tuple[int, int]:
         x, y = clicked_position
-        x = min(x // Dimension.SQUARE_WIDTH.value, Dimension.SCREEN_WIDTH.value // Dimension.SQUARE_WIDTH.value - 1)
-        y = min(y // Dimension.SQUARE_HEIGHT.value, Dimension.SCREEN_HEIGHT.value // Dimension.SQUARE_HEIGHT.value - 1)
+        x = min(x // Dimension.SQUARE_WIDTH.value, Dimension.board_width() - 1)
+        y = min(y // Dimension.SQUARE_HEIGHT.value, Dimension.board_height() - 1)
 
         return x, y
 

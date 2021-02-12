@@ -1,4 +1,5 @@
 from enum import Enum, unique
+from typing import Tuple
 
 
 class Dimension(Enum):
@@ -9,6 +10,18 @@ class Dimension(Enum):
     SQUARE_HEIGHT = 80
     SCREEN_WIDTH = 800
     SCREEN_HEIGHT = 800
+
+    @classmethod
+    def board_height(cls) -> int:
+        return cls.SCREEN_HEIGHT.value // cls.SQUARE_HEIGHT.value
+
+    @classmethod
+    def board_width(cls) -> int:
+        return cls.SCREEN_WIDTH.value // cls.SQUARE_WIDTH.value
+
+    @classmethod
+    def board_size(cls) -> Tuple[int, int]:
+        return cls.board_width(), cls.board_height()
 
 
 @unique
