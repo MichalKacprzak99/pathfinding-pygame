@@ -1,5 +1,4 @@
 import pygame as pg
-import math
 
 from typing import Tuple
 
@@ -23,13 +22,14 @@ class Square:
 
         :return: coordinates of top left corner of square
         """
-        return self.x * Dimension.SQUARE_WIDTH.value + 1, self.y * Dimension.SQUARE_HEIGHT.value + 1
+        return self.x * Dimension.SQUARE_WIDTH.value, self.y * Dimension.SQUARE_HEIGHT.value
 
     @staticmethod
     def convert_to_board_coordinates(clicked_position: Tuple[int, int]) -> Tuple[int, int]:
         x, y = clicked_position
-        x = math.floor(x / Dimension.SQUARE_WIDTH.value)
-        y = math.floor(y / Dimension.SQUARE_HEIGHT.value)
+        x = min(x // Dimension.SQUARE_WIDTH.value, Dimension.SCREEN_WIDTH.value // Dimension.SQUARE_WIDTH.value - 1)
+        y = min(y // Dimension.SQUARE_HEIGHT.value, Dimension.SCREEN_HEIGHT.value // Dimension.SQUARE_HEIGHT.value - 1)
+
         return x, y
 
     @property
@@ -44,7 +44,8 @@ class Square:
         :param color: color in RGB format
         :return: None
         """
-        rect = (self.window_coordinates, (Dimension.SQUARE_WIDTH.value - 1, Dimension.SQUARE_HEIGHT.value - 1))
+        shifted_window_coordinates = tuple(coord + 1 for coord in self.window_coordinates)
+        rect = (shifted_window_coordinates, (Dimension.SQUARE_WIDTH.value - 1, Dimension.SQUARE_HEIGHT.value - 1))
         pg.draw.rect(window, color, rect)
 
         pg.display.update(rect)
