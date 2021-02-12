@@ -34,7 +34,7 @@ class Application:
         self.caption = "Basic Pathfinding"
         self.window = pg.display.set_mode((Dimension.SCREEN_WIDTH.value, Dimension.SCREEN_HEIGHT.value))
         self.board = Board(self.window)
-        self.path_finder = PathFinder(self.window, self.board.matrix)
+        self.path_finder = PathFinder(self.window)
 
     def run(self):
         """
@@ -48,8 +48,8 @@ class Application:
 
             self.path_finder.draw_squares()
             if self.path_finder.path_able_to_find:
-                self.path_finder.find_path()
-
+                path = self.path_finder.find_path(self.board.matrix)
+                self.path_finder.draw_path(path)
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     pg.quit()

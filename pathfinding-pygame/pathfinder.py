@@ -12,14 +12,13 @@ from square import Square
 
 
 class PathFinder:
-    def __init__(self, window: pg.Surface, matrix: np.ndarray):
+    def __init__(self, window: pg.Surface):
         """
          Creates a new ``PathFinder`` instance.
         """
         self.start_square = None
         self.end_square = None
         self.window = window
-        self.matrix = matrix
         self.path_able_to_find = False
 
     def set_point(self, clicked_square: Square):
@@ -54,21 +53,20 @@ class PathFinder:
         if self.end_square is not None:
             self.end_square.draw(self.window, Colors.RED.value)
 
-    def find_path(self):
+    def find_path(self, matrix: np.ndarray) -> List[Square]:
         """
         Finds path between start and end square using A star algorithm.
-        If path is founded, it is drawn.
 
-        :return: None
+        :return: founded path
         """
-        grid = Grid(matrix=self.matrix)
+        grid = Grid(matrix=matrix)
         start = grid.node(*self.start_square.board_coordinates)
         end = grid.node(*self.end_square.board_coordinates)
         finder = AStarFinder(diagonal_movement=DiagonalMovement.never)
         path, runs = finder.find_path(start, end, grid)
         self.path_able_to_find = False
         path_squares = [Square(*path_point) for path_point in path[1:-1]]
-        self.draw_path(path_squares)
+        return path_squares
 
     def draw_path(self, path_squares: List[Square]):
         for path_square in path_squares:
