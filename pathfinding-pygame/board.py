@@ -37,8 +37,8 @@ class Board:
         self.board_size = (Dimension.SCREEN_HEIGHT.value//Dimension.SQUARE_HEIGHT.value,
                            Dimension.SCREEN_WIDTH.value//Dimension.SQUARE_WIDTH.value)
         self.board_matrix = np.full(self.board_size, 1)
-        self.obstacles = self.create_obstacles()
         self.maximum_obstacles_on_board = 10
+        self.obstacles = self.create_obstacles()
 
     def draw_board(self):
         """
@@ -86,7 +86,7 @@ class Board:
         obstacles_number = random.randint(1, self.maximum_obstacles_on_board)
         obstacles = list()
         board_height, board_width = self.board_size
-        print(obstacles_number)
+
         while len(obstacles) < obstacles_number:
             obstacle_x_cord = random.randint(0, board_width - 1)
             obstacle_y_cord = random.randint(0, board_height - 1)

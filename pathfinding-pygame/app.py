@@ -71,7 +71,6 @@ class Application:
         """
         self.path_finder.reset()
         self.board.recreate_obstacles()
-        self.path_finder.matrix = self.board.board_matrix
         self.board.draw_board()
 
     def choose_square(self):
