@@ -2,6 +2,7 @@
 ![GitHub](https://img.shields.io/github/license/MichalKacprzak99/pathfinding-pygame)
 ![GitHub top language](https://img.shields.io/github/languages/top/MichalKacprzak99/pathfinding-pygame)
 ![GitHub last commit](https://img.shields.io/github/last-commit/MichalKacprzak99/pathfinding-pygame)
+![test_coverage](docs/test_coverage.svg)
 ## Table of Contents
 
  * [Project Description](#project-description)
