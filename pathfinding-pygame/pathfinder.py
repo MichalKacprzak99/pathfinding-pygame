@@ -28,9 +28,10 @@ class PathFinder:
         :param clicked_square: clicked square by user
         :return: None
         """
+
         if self.start_square is None:
             self.start_square = clicked_square
-        elif self.end_square is None:
+        elif self.end_square is None and self.start_square != clicked_square:
             self.end_square = clicked_square
             self.path_able_to_find = True
 
