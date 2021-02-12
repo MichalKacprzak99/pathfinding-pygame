@@ -38,6 +38,7 @@ class Board:
                            Dimension.SCREEN_WIDTH.value//Dimension.SQUARE_WIDTH.value)
         self.board_matrix = np.full(self.board_size, 1)
         self.obstacles = self.create_obstacles()
+        self.maximum_obstacles_on_board = 10
 
     def draw_board(self):
         """
@@ -82,7 +83,7 @@ class Board:
         :return: list of obstacles coordinates
         :rtype: list
         """
-        obstacles_number = random.randint(1, 10)
+        obstacles_number = random.randint(1, self.maximum_obstacles_on_board)
         obstacles = list()
         board_height, board_width = self.board_size
         print(obstacles_number)
