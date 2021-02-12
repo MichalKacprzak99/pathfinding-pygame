@@ -48,7 +48,7 @@ class Application:
 
             self.path_finder.draw_squares()
             if self.path_finder.path_able_to_find:
-                path = self.path_finder.find_path(self.board.matrix)
+                path = self.path_finder.find_path(self.board.board_matrix)
                 self.path_finder.draw_path(path)
             for event in pg.event.get():
                 if event.type == pg.QUIT:
@@ -71,7 +71,7 @@ class Application:
         """
         self.path_finder.reset()
         self.board.recreate_obstacles()
-        self.path_finder.matrix = self.board.matrix
+        self.path_finder.matrix = self.board.board_matrix
         self.board.draw_board()
 
     def choose_square(self):

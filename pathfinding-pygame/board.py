@@ -19,7 +19,7 @@ class Board:
 
     window: pygame.Surface
         Pygame object for representing images.
-    matrix: numpy.ndarray
+    board_matrix: numpy.ndarray
         array 10x10 representing state of board .
         1 represents empty square and 0 represent obstacle.
 
@@ -34,7 +34,9 @@ class Board:
                 Pygame object for representing images.
         """
         self.window = window
-        self.matrix = np.full((10, 10), 1)
+        self.board_size = (Dimension.SCREEN_HEIGHT.value//Dimension.SQUARE_HEIGHT.value,
+                           Dimension.SCREEN_WIDTH.value//Dimension.SQUARE_WIDTH.value)
+        self.board_matrix = np.full(self.board_size, 1)
         self.obstacles = self.create_obstacles()
 
     def draw_board(self):
@@ -80,14 +82,17 @@ class Board:
         :return: list of obstacles coordinates
         :rtype: list
         """
-        obstacle_number = random.randint(1, 10)
+        obstacles_number = random.randint(1, 10)
         obstacles = list()
-
-        for _ in range(obstacle_number):
-            obstacle_x_cord = random.randint(0, 9)
-            obstacle_y_cord = random.randint(0, 9)
-            self.matrix[obstacle_y_cord][obstacle_x_cord] = 0
-            obstacles.append(Square(obstacle_x_cord, obstacle_y_cord))
+        board_height, board_width = self.board_size
+        print(obstacles_number)
+        while len(obstacles) < obstacles_number:
+            obstacle_x_cord = random.randint(0, board_width - 1)
+            obstacle_y_cord = random.randint(0, board_height - 1)
+            obstacle = Square(obstacle_x_cord, obstacle_y_cord)
+            if obstacle not in obstacles:
+                self.board_matrix[obstacle_y_cord][obstacle_x_cord] = 0
+                obstacles.append(Square(obstacle_x_cord, obstacle_y_cord))
 
         return obstacles
 
@@ -99,7 +104,7 @@ class Board:
         :return: true if square is empty, otherwise false
         """
         x_cord, y_cord = clicked_square.board_coordinates
-        return self.matrix[y_cord][x_cord] == 1
+        return self.board_matrix[y_cord][x_cord] == 1
 
     def recreate_obstacles(self):
         """
@@ -107,7 +112,7 @@ class Board:
 
         :return: None
         """
-        self.matrix = np.full((10, 10), 1)
+        self.board_matrix = np.full((10, 10), 1)
         self.obstacles = self.create_obstacles()
 
 
