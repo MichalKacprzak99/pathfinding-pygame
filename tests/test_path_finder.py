@@ -4,7 +4,7 @@ import numpy as np
 
 from square import Square
 from pathfinder import PathFinder
-from settings import Dimension
+from utils import Dimension
 
 
 class PathFinderTest(unittest.TestCase):

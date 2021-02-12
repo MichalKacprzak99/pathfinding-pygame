@@ -4,7 +4,7 @@ from typing import List
 import numpy as np
 import pygame as pg
 
-from settings import Dimension, Colors
+from utils import Dimension, Colors
 from square import Square
 
 

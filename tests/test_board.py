@@ -4,7 +4,7 @@ import numpy as np
 
 from board import Board
 from square import Square
-from settings import Dimension
+from utils import Dimension
 
 
 class BoardTest(unittest.TestCase):

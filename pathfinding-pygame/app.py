@@ -1,7 +1,7 @@
 import sys
 import pygame as pg
 
-from settings import Dimension, Buttons
+from utils import Dimension, Buttons
 from board import Board
 from pathfinder import PathFinder
 from square import Square

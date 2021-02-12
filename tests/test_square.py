@@ -2,7 +2,7 @@ import unittest
 import random
 
 from square import Square
-from settings import Dimension
+from utils import Dimension
 
 
 class SquareTest(unittest.TestCase):

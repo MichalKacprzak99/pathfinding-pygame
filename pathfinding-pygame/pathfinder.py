@@ -7,7 +7,7 @@ from pathfinding.core.diagonal_movement import DiagonalMovement
 from pathfinding.core.grid import Grid
 from pathfinding.finder.a_star import AStarFinder
 
-from settings import Colors
+from utils import Colors
 from square import Square
 
 

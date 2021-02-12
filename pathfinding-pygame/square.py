@@ -2,7 +2,7 @@ import pygame as pg
 
 from typing import Tuple
 
-from settings import Dimension
+from utils import Dimension
 
 
 class Square:
