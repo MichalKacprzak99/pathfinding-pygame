@@ -1,3 +1,5 @@
+import pygame as pg
+
 from enum import Enum, unique
 from typing import Tuple
 
@@ -29,16 +31,16 @@ class Colors(Enum):
     """
     Class for storing colors in RGB format.
     """
-    WHITE = (255, 255, 255)
-    BLACK = (0, 0, 0)
-    GREEN = (0, 255, 0)
-    RED = (255, 0, 0)
-    YELLOW = (255, 255, 0)
-    BROWN = (106, 55, 5)
-    BLUE = (0, 0, 255)
-    GRAY = (128, 128, 128)
-    BUMBLEBEE = (255, 226, 5)
-    ORANGE = (229, 83, 0)
+    WHITE = pg.Color(255, 255, 255)
+    BLACK = pg.Color(0, 0, 0)
+    GREEN = pg.Color(0, 255, 0)
+    RED = pg.Color(255, 0, 0)
+    YELLOW = pg.Color(255, 255, 0)
+    BROWN = pg.Color(106, 55, 5)
+    BLUE = pg.Color(0, 0, 255)
+    GRAY = pg.Color(128, 128, 128)
+    BUMBLEBEE = pg.Color(255, 226, 5)
+    ORANGE = pg.Color(229, 83, 0)
 
 
 @unique
@@ -48,6 +50,4 @@ class Buttons(Enum):
     """
     MOUSE_LEFT = 1
     MOUSE_RIGHT = 3
-
-
-
+    R_KEYBOARD = 114
