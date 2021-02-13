@@ -22,10 +22,7 @@ class BoardTest(unittest.TestCase):
 
     def test_is_square_empty_false(self):
         clicked_square_test = Square(0, 0)
-
-        self.board.board_matrix = np.full(Dimension.board_size(), 1)
-
-        self.board.board_matrix[0][0] = 0
+        self.board.obstacles = [Square(0, 0)]
         result = self.board.is_square_empty(clicked_square_test)
         self.assertFalse(result)
 

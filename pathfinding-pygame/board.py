@@ -34,7 +34,6 @@ class Board:
                 Pygame object for representing images.
         """
         self.window = window
-
         self.board_matrix = np.full(Dimension.board_size(), 1)
         self.maximum_obstacles_on_board = 10
         self.obstacles = self.create_obstacles()
@@ -69,9 +68,7 @@ class Board:
 
         :return: None
         """
-
         for obstacle in self.obstacles:
-
             obstacle.draw(self.window, Colors.BLACK.value)
 
     def create_obstacles(self) -> List[Square]:
@@ -86,24 +83,24 @@ class Board:
         obstacles = list()
 
         while len(obstacles) < obstacles_number:
-            obstacle_x_cord = random.randint(0, Dimension.board_width() - 1)
-            obstacle_y_cord = random.randint(0, Dimension.board_height() - 1)
-            obstacle = Square(obstacle_x_cord, obstacle_y_cord)
+
+            obstacle_x_pos = random.randint(0, Dimension.board_width() - 1)
+            obstacle_y_pos = random.randint(0, Dimension.board_height() - 1)
+            obstacle = Square(obstacle_x_pos, obstacle_y_pos)
             if obstacle not in obstacles:
-                self.board_matrix[obstacle_y_cord][obstacle_x_cord] = 0
-                obstacles.append(Square(obstacle_x_cord, obstacle_y_cord))
+                self.board_matrix[obstacle_y_pos][obstacle_x_pos] = 0
+                obstacles.append(obstacle)
 
         return obstacles
 
     def is_square_empty(self, clicked_square: Square) -> bool:
         """
-        Checks if clicked square is empty and it's possible to start/end path here.
+        Checks if clicked square is not obstacle and it's possible to start/end path here.
 
         :param clicked_square: A square of board which user clicked.
-        :return: true if square is empty, otherwise false
+        :return: true if square is not obstacle, otherwise false
         """
-        x_cord, y_cord = clicked_square.board_coordinates
-        return self.board_matrix[y_cord][x_cord] == 1
+        return clicked_square not in self.obstacles
 
     def recreate_obstacles(self):
         """
@@ -111,5 +108,6 @@ class Board:
 
         :return: None
         """
-        self.board_matrix = np.full((10, 10), 1)
+        self.board_matrix = np.full(Dimension.board_size(), 1)
         self.obstacles = self.create_obstacles()
+
